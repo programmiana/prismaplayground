@@ -36,7 +36,7 @@ function success(pos) {
     //     formatTime(time.getUTCSeconds()),
     //   ].join(":");
 
-      time.toJSON() >= sunset
+      time.toJSON() > sunset
         ? body.classList.add("nightMode")
         : body.classList.remove("nightMode");
     })
