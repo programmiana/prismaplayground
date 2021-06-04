@@ -1,0 +1,17 @@
+button {
+    font-family: 'Oswald', sans-serif;
+    padding: 5em 10em;
+    font-size: 2rem
+
+}
+
+.flexbox{
+    display: flex;
+    padding-top: 30vh;
+    justify-content: center
+}
+
+.nightMode {
+    background-color: midnightblue;
+    color: antiquewhite;
+}
