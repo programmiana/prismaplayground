@@ -1,15 +1,17 @@
-// const { default: axios } = require("axios");
-
-const toggleColorButton = document.querySelector(".toggle-color");
 const body = document.getElementsByTagName("BODY")[0];
-
-toggleColorButton.addEventListener("click", (e) => toggle(e));
+const flexbox = document.querySelector(".flexbox");
 
 const time = new Date();
 
-const options = {
+const geoLocationOptions = {
   timeout: 5000,
   maximumAge: 0,
+};
+
+let state = {
+  loading: true,
+  data: {},
+  mode: {},
 };
 
 function success(pos) {
@@ -18,27 +20,22 @@ function success(pos) {
   const coordinates = pos.coords;
   const latitude = coordinates.latitude;
   const longitude = coordinates.longitude;
-  const sunriseSunset = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&formatted=0`;
+  const sunsetEndpoint = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&formatted=0`;
 
   axios
-    .get(sunriseSunset)
+    .get(sunsetEndpoint)
     .then((res) => {
-      const data = res.data.results;
+      if (res.data.results) {
+        console.log("not loading");
+        state.loading = false;
+        state.data = res.data.results;
 
-      const { sunrise, sunset } = data;
+        const { sunset } = state.data;
 
-    //   function formatTime(time) {
-    //    return time < 10 ? "0" + time : time;
-    //   }
-    //   const utcTime = [
-    //     formatTime(time.getUTCHours()),
-    //     formatTime(time.getUTCMinutes()),
-    //     formatTime(time.getUTCSeconds()),
-    //   ].join(":");
+        time.toJSON() > sunset ? (state.mode = "dark") : (state.mode = "day");
 
-      time.toJSON() > sunset
-        ? body.classList.add("nightMode")
-        : body.classList.remove("nightMode");
+        dispatch(state.mode);
+      }
     })
     .catch((err) => console.log(err));
 }
@@ -47,15 +44,35 @@ function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
-navigator.geolocation.getCurrentPosition(success, error, options);
+navigator.geolocation.getCurrentPosition(success, error, geoLocationOptions);
 
-function toggle(e) {
-  body.classList.toggle("nightMode");
-
-  const button = e.currentTarget;
-  const str = e.currentTarget.innerText;
-
-  return str.includes("Night")
-    ? (button.innerText = "Day Mode")
-    : (button.innerText = "Night Mode");
+function dispatch(oneMode) {
+  if (oneMode === "dark") {
+    state.mode = "dark";
+    return generateButton(state.mode);
+  }
+  if (oneMode === "day") {
+    state.mode = "day";
+    return generateButton(state.mode);
+  }
 }
+
+function generateButton(mode) {
+  flexbox.innerHTML = '';
+  mode === "dark"
+    ? (flexbox.innerHTML = `<button class="nightMode"> Night Mode </button>`)
+    : (flexbox.innerHTML = `<button>Day Mode</button>`);
+}
+
+flexbox.addEventListener("click", (e) => {
+  if (e.target.matches("button")) {
+    console.log(state.mode);
+    if (state.mode === "day") {
+      state.mode = "dark";
+      dispatch(state.mode);
+    } else {
+      state.mode = "day";
+      dispatch(state.mode);
+    }
+  }
+});

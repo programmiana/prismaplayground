@@ -1,8 +1,8 @@
 button {
     font-family: 'Oswald', sans-serif;
     padding: 5em 10em;
-    font-size: 2rem
-
+    font-size: 2rem;
+    background-color: transparent;
 }
 
 .flexbox{
@@ -11,7 +11,7 @@ button {
     justify-content: center
 }
 
-.nightMode {
-    background-color: midnightblue;
+.nightMode, text {
+    background-color: #0A0D10;
     color: antiquewhite;
 }
