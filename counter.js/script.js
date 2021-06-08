@@ -8,8 +8,8 @@ const reset = document.createElement("button");
 const countDisplay = document.createElement("div");
 
 container.insertAdjacentElement("afterend", countDisplay);
- countDisplay.classList.add('display')
- containerDiv.appendChild(countDisplay)
+countDisplay.classList.add("display");
+containerDiv.appendChild(countDisplay);
 
 container.appendChild(increase);
 
@@ -42,7 +42,6 @@ function handleClick(e) {
 }
 
 function render(number) {
-const colorName = number > 0 ? 'blue' : number === 0 ? 'black' : 'red'
-return (countDisplay.innerHTML = `<p style="color: ${colorName}">${number}</p>`);
-  
+  const colorName = number > 0 ? "blue" : number === 0 ? "black" : "red";
+  return (countDisplay.innerHTML = `<p style="color: ${colorName}">${number}</p>`);
 }
