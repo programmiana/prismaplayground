@@ -25,8 +25,11 @@ function success(pos) {
   axios
     .get(sunsetEndpoint)
     .then((res) => {
+      if (state.loading) {
+        state.mode = "loading";
+        dispatch(state.mode)
+      }
       if (res.data.results) {
-        console.log("not loading");
         state.loading = false;
         state.data = res.data.results;
 
@@ -47,6 +50,11 @@ function error(err) {
 navigator.geolocation.getCurrentPosition(success, error, geoLocationOptions);
 
 function dispatch(oneMode) {
+  if (oneMode === "loading") {
+    console.log('loading')
+    state.mode = "loading";
+    return generateButton(state.mode);
+  }
   if (oneMode === "dark") {
     state.mode = "dark";
     return generateButton(state.mode);
@@ -58,8 +66,9 @@ function dispatch(oneMode) {
 }
 
 function generateButton(mode) {
-  flexbox.innerHTML = '';
-  mode === "dark"
+  mode === "loading"
+    ? `<div>Querying location...</div>`
+    : mode === "dark"
     ? (flexbox.innerHTML = `<button class="nightMode"> Night Mode </button>`)
     : (flexbox.innerHTML = `<button>Day Mode</button>`);
 }
