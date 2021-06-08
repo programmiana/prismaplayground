@@ -1,0 +1,29 @@
+body {
+    font-family: Oswald;
+  }
+  
+  button {
+    font-family: "Oswald", sans-serif;
+    padding: 1em 2em;
+    font-size: 2rem;
+    margin: 1em 2em;
+    background-color: transparent;
+  }
+  
+  .flexbox {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .display {
+    height: 2em;
+    width: 2em;
+    padding: 1em 2em;
+    text-align: center;
+    padding-left: 44vw;
+    width: 10vw;
+  }
+  

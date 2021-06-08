@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Counter</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="flexbox">
+        <h1>Tip Calculator</h1>
+        <form>
+            <div>
+                <label for="total">Amount:</label>
+                <input type="number" name="total" required>
+                <label for="service">Service was:</label>
+                <select type="select" name="service" required>
+                    <option value="premium">Premium</option>
+                    <option value="good">I've had better</option>
+                    <option value="terrible">I haven't had worst</option>
+                </select>
+                <label for="feeling">I'm feeling:</label>
+                <select type="select" name="feeling" required>
+                    <option value="rich">Rich</option>
+                    <option value="poor">Poor</option>
+                </select>
+            </div>
+            <button type="submit">Calculate tip</button>
+        </form>
+  </div>
+</div>
+  <script src="./script.js" type="module"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</body>
+
+</html>
