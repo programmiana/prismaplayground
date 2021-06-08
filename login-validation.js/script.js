@@ -31,11 +31,9 @@ form.addEventListener("submit", (e) => handleSubmit(e));
 
 function handleSubmit(e) {
   const email = form["email"].value;
-  const email = form["email"].value;
   e.preventDefault()
   if(email) {
     return email === '' || !email.includes('@') ? console.log('invalid') : console.log('valid')  
-
   }
 
 }
