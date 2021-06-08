@@ -1,12 +1,15 @@
-const container = document.querySelector(".flexbox");
+const containerDiv = document.querySelector(".flexbox");
+const container = document.querySelector(".counter");
 
 const increase = document.createElement("button");
 const decrease = document.createElement("button");
 const reset = document.createElement("button");
 
-const countNumber = document.createElement("div");
+const countDisplay = document.createElement("div");
 
-container.insertAdjacentElement("beforebegin", countNumber);
+container.insertAdjacentElement("afterend", countDisplay);
+ countDisplay.classList.add('display')
+ containerDiv.appendChild(countDisplay)
 
 container.appendChild(increase);
 
@@ -39,5 +42,7 @@ function handleClick(e) {
 }
 
 function render(number) {
-  return (countNumber.innerHTML = `<p>${number}</p>`);
+const colorName = number > 0 ? 'blue' : number === 0 ? 'black' : 'red'
+return (countDisplay.innerHTML = `<p style="color: ${colorName}">${number}</p>`);
+  
 }
