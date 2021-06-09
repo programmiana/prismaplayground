@@ -112,14 +112,13 @@ function renderHTML(state) {
 }
 
 function dispatch(state) {
-
   return renderHTML(state);
 }
 
 app.addEventListener("change", (e) => searchValue(e));
 
 function searchValue(e) {
-  if (state.wordFound !== '') state.searchValue = '';
+  if (state.wordFound !== "") state.searchValue = "";
   searchValue = e.target.value;
   state.searchString = searchValue;
 
@@ -128,18 +127,13 @@ function searchValue(e) {
     state.wordFound = "404";
     dispatch(state);
   } else if ([...searchValue].length === 3) {
-    console.log(Array.from(Object.values(statusMessages)));
     const found = Array.from(Object.keys(statusMessages))
       .map((item) => (item.includes(searchValue) ? item : undefined))
       .filter((value) => value !== undefined);
 
-    console.log(found);
-
     state.wordFound = found;
 
     if (found) state.somethingFound = true;
-
-    if(state.somethingFound) state.searchString = ''
 
     return dispatch(state);
   }
