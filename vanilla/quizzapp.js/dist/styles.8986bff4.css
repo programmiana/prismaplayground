@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    font-family: Oswald;
+
+  }
+
+  ul, li {
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  
+
+  button {
+    font-family: "Oswald", sans-serif;
+    padding: 1em 2em;
+    font-size: 2rem;
+    margin: 1em 2em;
+    background-color: transparent;
+  }
+  
+  .flexbox {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .display {
+    height: 2em;
+    width: 2em;
+    padding: 1em 2em;
+    text-align: center;
+    padding-left: 44vw;
+    width: 10vw;
+  }
+
+
+  
+
+
+
+/*# sourceMappingURL=/styles.8986bff4.css.map */
