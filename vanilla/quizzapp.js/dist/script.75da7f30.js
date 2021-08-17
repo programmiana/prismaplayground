@@ -195,7 +195,86 @@ function create(createState) {
 
 exports.default = create;
 
-},{}],"store.js":[function(require,module,exports) {
+},{}],"select-options.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var selectOptions = [{
+  name: 'Any Category',
+  value: 0
+}, {
+  name: 'General Knowledge',
+  value: 9
+}, {
+  name: 'Entertainment: Books',
+  value: 10
+}, {
+  name: 'Entertainment: Film',
+  value: 11
+}, {
+  name: 'Entertainment: Music',
+  value: 12
+}, {
+  name: 'Entertainment: Musicals & Theatres',
+  value: 13
+}, {
+  name: 'Entertainment: Television',
+  value: 14
+}, {
+  name: 'Entertainment: Video Games',
+  value: 15
+}, {
+  name: 'Entertainment: Board Games',
+  value: 16
+}, {
+  name: 'Science and Nature',
+  value: 17
+}, {
+  name: 'Science: Computers',
+  value: 18
+}, {
+  name: 'Science: Mathematics',
+  value: 19
+}, {
+  name: 'Mythology',
+  value: 20
+}, {
+  name: 'Sports',
+  value: 21
+}, {
+  name: 'Geography',
+  value: 22
+}, {
+  name: 'History',
+  value: 23
+}, {
+  name: 'Politics',
+  value: 24
+}, {
+  name: 'Art',
+  value: 25
+}, {
+  name: 'Celebrities',
+  value: 26
+}, {
+  name: 'Animals',
+  value: 27
+}, {
+  name: 'Vehicles',
+  value: 28
+}, {
+  name: 'Entertainment: Comics',
+  value: 22
+}, {
+  name: 'Science: Gadgets',
+  value: 22
+}];
+var _default = selectOptions;
+exports.default = _default;
+},{}],"params-store.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2777,7 +2856,9 @@ module.exports = require('./lib/axios');
 
 var _vanilla = _interopRequireDefault(require("zustand/vanilla"));
 
-var _store = _interopRequireDefault(require("./store"));
+var _selectOptions = _interopRequireDefault(require("./select-options.js"));
+
+var _paramsStore = _interopRequireDefault(require("./params-store"));
 
 require("regenerator-runtime/runtime");
 
@@ -2785,82 +2866,29 @@ var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var app = document.getElementById("app");
-
-var _paramStore$getState = _store.default.getState(),
-    amount = _paramStore$getState.amount,
-    category = _paramStore$getState.category,
-    difficulty = _paramStore$getState.difficulty,
-    type = _paramStore$getState.type;
-
-var endpoint = "https://opentdb.com/api.php?amount=".concat(amount, "&category=").concat(category, "&difficulty=").concat(difficulty, "&type=").concat(type);
-var buttonContainer = document.createElement("div");
-var moreQuestions = document.createElement("button");
-var keepQuestions = document.createElement("button");
-var questionsStore = (0, _vanilla.default)(function (set) {
+var gameStore = (0, _vanilla.default)(function (set) {
   return {
-    questions: {},
-    fetch: function () {
-      var _fetch = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var response;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _axios.default.get(endpoint);
-
-              case 2:
-                response = _context.sent;
-                set({
-                  questions: response.data.results
-                });
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      function fetch() {
-        return _fetch.apply(this, arguments);
-      }
-
-      return fetch;
-    }(),
-    keepQuestion: false,
-    hasCorrectAnswer: false,
-    round: 0,
-    points: 0,
-    gameOver: false
+    // questions: {},
+    // fetch: async () => {
+    //   const response = await axios.get(endpoint);
+    //   set({ questions: response.data.results });
+    // },
+    // keepQuestion: false,
+    // hasCorrectAnswer: false,
+    // round: 0,
+    // points: 0,
+    gameOver: false,
+    gameStart: true
   };
 });
+generateQuestionsHtml(gameStore);
 app.addEventListener("click", function (e) {
   e.preventDefault();
-
-  var _questionsStore$getSt = questionsStore.getState(),
-      keepQuestion = _questionsStore$getSt.keepQuestion,
-      questions = _questionsStore$getSt.questions,
-      round = _questionsStore$getSt.round,
-      points = _questionsStore$getSt.points;
 
   if (e.target.innerText === "I like these questions") {
     questionsStore.setState({
@@ -2870,9 +2898,6 @@ app.addEventListener("click", function (e) {
   }
 
   if (e.target.innerText === "Give me more questions") {
-    sessionStorage.removeItem("questions-storage");
-    console.log("cleared");
-    console.log(JSON.parse(sessionStorage.getItem("questions-storage")));
     fetchThings();
   }
 
@@ -2893,42 +2918,119 @@ app.addEventListener("click", function (e) {
     questionsStore.setState({
       round: round + 1
     });
-    console.log(questionsStore.getState());
+    fetchThings();
+  }
+
+  if (e.target.type === "submit") {
+    var form = document.querySelector("form");
+
+    _paramsStore.default.setState({
+      amount: form.elements["number"].value ? form.elements["number"].value : 10
+    });
+
+    _paramsStore.default.setState({
+      category: form.elements["category"].value === "0" ? Math.floor(Math.random() * 30) : form.elements["category"].value
+    });
+
+    _paramsStore.default.setState({
+      difficulty: form.elements["difficulty"].value
+    });
+
+    generateStore(_paramsStore.default);
   }
 });
 
-function fetchThings() {
+function generateStore(paramStore) {
+  var _paramStore$getState = paramStore.getState(),
+      amount = _paramStore$getState.amount,
+      category = _paramStore$getState.category,
+      difficulty = _paramStore$getState.difficulty,
+      type = _paramStore$getState.type;
+
+  var endpoint = "https://opentdb.com/api.php?amount=".concat(amount, "&category=").concat(category, "&difficulty=").concat(difficulty, "&type=").concat(type);
+  console.log(endpoint);
+  var questionsStore = (0, _vanilla.default)(function (set) {
+    return {
+      questions: {},
+      fetch: function () {
+        var _fetch = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+          var response;
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.next = 2;
+                  return _axios.default.get(endpoint);
+
+                case 2:
+                  response = _context.sent;
+                  set({
+                    questions: response.data.results
+                  });
+
+                case 4:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        function fetch() {
+          return _fetch.apply(this, arguments);
+        }
+
+        return fetch;
+      }(),
+      keepQuestion: false,
+      hasCorrectAnswer: false,
+      round: 0,
+      points: 0,
+      gameOver: false,
+      gameStart: true
+    };
+  });
+  fetchThings(questionsStore);
+}
+
+function fetchThings(_x) {
   return _fetchThings.apply(this, arguments);
 }
 
 function _fetchThings() {
-  _fetchThings = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-    var _questionsStore$getSt3, keepQuestion, questions;
-
+  _fetchThings = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(store) {
+    var theseQuestions;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _questionsStore$getSt3 = questionsStore.getState(), keepQuestion = _questionsStore$getSt3.keepQuestion;
-            _context2.t0 = !keepQuestion;
+            if (store) {
+              _context2.next = 2;
+              break;
+            }
 
-            if (!_context2.t0) {
-              _context2.next = 5;
+            return _context2.abrupt("return");
+
+          case 2:
+            if (!store) {
+              _context2.next = 11;
               break;
             }
 
             _context2.next = 5;
-            return questionsStore.getState().fetch();
+            return store.getState().fetch();
 
           case 5:
             _context2.next = 7;
-            return questionsStore.getState().questions;
+            return store.getState().questions;
 
           case 7:
-            questions = _context2.sent;
-            generateQuestionsHtml(questions, questionsStore);
+            theseQuestions = _context2.sent;
+            store.getState();
+            console.log(theseQuestions);
+            generateQuestionsHtml(theseQuestions, store);
 
-          case 9:
+          case 11:
           case "end":
             return _context2.stop();
         }
@@ -2938,41 +3040,47 @@ function _fetchThings() {
   return _fetchThings.apply(this, arguments);
 }
 
-fetchThings();
-
 function generateQuestionsHtml(arr, store) {
-  var _questionsStore$getSt2 = questionsStore.getState(),
-      keepQuestion = _questionsStore$getSt2.keepQuestion,
-      questions = _questionsStore$getSt2.questions,
-      round = _questionsStore$getSt2.round;
+  var _gameStore$getState = gameStore.getState(),
+      gameStart = _gameStore$getState.gameStart,
+      gameOver = _gameStore$getState.gameOver; // const {
+  //   keepQuestion,
+  //   questions,
+  //   round,
+  //   hasCorrectAnswer,
+  //   points,
+  //   gameStart,
+  // } = questionsStore.getState();
+  // const findQuestion = arr.find((question, index) => index === round);
+  // const answers = [
+  //   findQuestion.correct_answer,
+  //   ...findQuestion.incorrect_answers,
+  // ];
+  // const shuffleAnswers = (arr) => {
+  //   for (let i = arr.length - 1; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * i);
+  //     const temp = arr[i];
+  //     arr[i] = arr[j];
+  //     arr[j] = temp;
+  //   }
+  //   return arr;
+  // };
+  // shuffleAnswers(answers);
 
-  var findQuestion = arr.find(function (question, index) {
-    return index === round;
-  });
-  var answers = [findQuestion.correct_answer].concat(_toConsumableArray(findQuestion.incorrect_answers));
 
-  var shuffleAnswers = function shuffleAnswers(arr) {
-    for (var i = arr.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * i);
-      var temp = arr[i];
-      arr[i] = arr[j];
-      arr[j] = temp;
-    }
-
-    return arr;
-  };
-
-  shuffleAnswers(answers);
-  var correct = document.querySelector("correct");
-  console.log(correct);
-  var html = "\n  <h1>QUIZAPP</h1>\n\n  <button>I like these questions</button>\n  <button>".concat(keepQuestion ? "Restart" : "Give me more questions", "</button>\n  \n  <div>\n  ").concat(keepQuestion ? "<div>" + round + 1 + ") " + findQuestion.question + answers.map(function (answer, index) {
+  var keepQuestion = false;
+  var hasCorrectAnswer = false;
+  var startHTML = "<h1>QUIZAPP</h1>\n    <form id=\"param-form\"> \n  <label for=\"number\"> Number of questions </label>\n  <input type=\"text\" id=\"number\" name=\"number\" required>\n  <label for=\"select\"> Select Category </label>\n  <select name=\"category\" id=\"category\">\n  ".concat(_selectOptions.default.map(function (option) {
+    return "<option value=".concat(option.value, ">").concat(option.name, "</option>");
+  }), "\n  </select>\n  \n  <select name=\"difficulty\" id=\"difficulty\">\n  <option value=\"easy\">Easy</option>\n  <option value=\"medium\">Medium</option>\n  <option value=\"hard\">Hard</option>\n  </select>\n  </form>\n<div>\n  <button type=\"submit\" form=\"param-form\">Start Quizzzzz</button>\n</div>");
+  var html = "\n  <h1>QUIZAPP</h1>\n  ".concat(!keepQuestion ? "<button>I like these questions</button>" : "", "\n  <button>").concat(keepQuestion ? "Restart" : "Give me more questions", "</button>\n  \n  <div>\n  ").concat(hasCorrectAnswer ? "".concat(points) + " CORRECT" : "", "\n  ").concat(keepQuestion ? "<div>" + (round + 1) + ") " + findQuestion.question + answers.map(function (answer, index) {
     return "<div>" + "<button class=".concat(answer === findQuestion.correct_answer ? "correct" : "incorrect", ">") + answer + "</button>" + "</div>";
-  }).join(" ") + "</div>" : "<ul>\n  ".concat(arr.map(function (question, index) {
+  }).join(" ") + "</div>" : "<ul>\n  ".concat(arr.length ? arr.map(function (question, index) {
     return "<li>" + (index + 1) + ") " + question.question + "</li>";
-  }).join(" "), "\n  </ul>\n  \n  </div>"), "\n  \n  ");
-  app.innerHTML = html;
+  }).join(" ") : "", "\n  </ul>\n  \n  </div>"), "\n  }");
+  app.innerHTML = gameStart ? startHTML : html;
 }
-},{"zustand/vanilla":"../../../../node_modules/zustand/vanilla.js","./store":"store.js","regenerator-runtime/runtime":"../../../../node_modules/regenerator-runtime/runtime.js","axios":"../../../../node_modules/axios/index.js"}],"../../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"zustand/vanilla":"../../../../node_modules/zustand/vanilla.js","./select-options.js":"select-options.js","./params-store":"params-store.js","regenerator-runtime/runtime":"../../../../node_modules/regenerator-runtime/runtime.js","axios":"../../../../node_modules/axios/index.js"}],"../../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -3000,7 +3108,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53260" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64871" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

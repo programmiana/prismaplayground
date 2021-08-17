@@ -4,5 +4,4 @@ const paramStore = create(() => ({ category: 9, amount: 10, difficulty: 'medium'
  }))
 const { getState, setState, subscribe, destroy } = paramStore
 
-
 export default paramStore;
