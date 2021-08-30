@@ -1,0 +1,19 @@
+{
+  "name": "csv-to-json",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "convert-excel-to-json": "^1.7.0",
+    "csv-excel-to-json": "^1.0.1",
+    "csv-parser": "^3.0.0",
+    "csvtojson": "^2.0.10",
+    "fs": "^0.0.1-security"
+  }
+}
